@@ -1,5 +1,6 @@
 *.o
 *.rej
-*.rej
+*.orig
 dwm
 tags
+colors.h
