@@ -1,0 +1,5 @@
+*.o
+*.rej
+*.rej
+dwm
+tags
