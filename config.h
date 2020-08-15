@@ -37,12 +37,13 @@ static const Rule rules[] = {
 	{ NULL,	                "Xephyr",       NULL,	        0,	            0,           0,	        0,           -1 },
 	{ "st-256color",        "st-256color",  NULL,           0,                  0,           1,             0,           -1 },
         { "Firefox",            "Toolkit",      "Picture-in-Picture", 0,            1,           0,             0,           -1 },
+        { "godot_boids",        "Godot_Engine",           NULL,           0,                  1,           0,             0,           -1 }
 };
 
 /* layout(s) */
 static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
-static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
+static const int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
@@ -71,7 +72,8 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont,
 
 static const char *termcmd[]  = { "st", NULL };
 static const char *browsercmd[] = { "firefox", NULL };
-static const char *changecolorscmd[] = { "dwm-changecolortheme", NULL };
+static const char *passcmd[] = { "passmenu" , NULL };
+//static const char *changecolorscmd[] = { "dwm-changecolortheme", NULL };
 static const char *lockcmd[] = {"betterlockscreen", "-l", NULL };
 //static const char *screenshotcmd[] = {"scrot", "'%Y-%m-%d_$wx$h.png'", "-e", "'mv $f ~/pictures/%Y/screenshots/", NULL };
 //static const char *wallpapercmd[] = {"wal", "-i", "/home/username/pictures/wallpapers", NULL};
@@ -86,7 +88,8 @@ static Key keys[] = {
 	{ MODKEY,                       XK_semicolon,   spawn,          {.v = termcmd } },
         { MODKEY,                       XK_b,           spawn,          {.v = browsercmd } },
         { MODKEY,                       XK_l,           spawn,          {.v = lockcmd } },
-        { MODKEY,                       XK_w,           spawn,          {.v = changecolorscmd } },
+        { MODKEY,                       XK_p,           spawn,          {.v = passcmd } },
+        //{ MODKEY,                       XK_w,           spawn,          {.v = changecolorscmd } },
 	{ MODKEY,            		XK_s,  	        togglescratch,  {.ui = 0 } },
 	{ MODKEY,            		XK_p,	        togglescratch,  {.ui = 1 } },
 	{ MODKEY|ShiftMask,             XK_b,           togglebar,      {0} },
@@ -106,6 +109,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_o,           setlayout,      {.v = &layouts[4]} },
 	{ MODKEY,                       XK_space,       setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,       togglefloating, {0} },
+	{ MODKEY|ShiftMask,             XK_s,           togglesticky,   {0} },
 	{ MODKEY,                       XK_0,           view,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,           tag,            {.ui = ~0 } },
 	{ MODKEY,                       XK_comma,       focusmon,       {.i = -1 } },
