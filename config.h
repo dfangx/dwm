@@ -9,7 +9,23 @@ static const int topbar             = 1;        /* 0 means bottom bar */
 static const int focusonwheel       = 0;
 static const char *fonts[]          = { "Inconsolata:size=13", "materialdesignicons-webfont:size=13" };
 static const char dmenufont[]       = "Inconsolata:size=13";
-#include "colors.h"
+//#include "colors.h"
+static const char col_gray1[]       = "#222222";
+static const char col_gray2[]       = "#444444";
+static const char col_gray3[]       = "#bbbbbb";
+static const char col_gray4[]       = "#eeeeee";
+static const char col_cyan[]        = "#005577";
+static const char col_turquoise[]   = "#009999";
+
+static const char col_nordbg[]      = "#2e3440";
+static const char col_nordfg[]      = "#d8dee9";
+static const char col_nordselbg[]   = "#4c566a";
+
+static const char *colors[][3]      = {
+	/*               fg         bg         border   */
+	[SchemeNorm] = { col_nordfg, col_nordbg, col_gray2 },
+	[SchemeSel]  = { col_gray4, col_nordselbg,  col_cyan  },
+};
 
 typedef struct {
 	const char *name;
@@ -67,8 +83,8 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-//static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", norm_bg, "-nf", norm_fg, "-sb", sel_bg, "-sf", sel_fg, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
+//static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", norm_bg, "-nf", norm_fg, "-sb", sel_bg, "-sf", sel_fg, NULL };
 
 static const char *termcmd[]  = { "st", NULL };
 static const char *browsercmd[] = { "firefox", NULL };
@@ -110,6 +126,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_space,       setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,       togglefloating, {0} },
 	{ MODKEY|ShiftMask,             XK_s,           togglesticky,   {0} },
+	{ MODKEY|ShiftMask,             XK_f,      fullscreen,     {0} },
 	{ MODKEY,                       XK_0,           view,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,           tag,            {.ui = ~0 } },
 	{ MODKEY,                       XK_comma,       focusmon,       {.i = -1 } },
