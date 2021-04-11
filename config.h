@@ -10,22 +10,46 @@ static const int focusonwheel       = 0;
 static const char *fonts[]          = { "Inconsolata:size=13", "materialdesignicons-webfont:size=13" };
 static const char dmenufont[]       = "Inconsolata:size=13";
 //#include "colors.h"
-static const char col_gray1[]       = "#222222";
-static const char col_gray2[]       = "#444444";
-static const char col_gray3[]       = "#bbbbbb";
-static const char col_gray4[]       = "#eeeeee";
-static const char col_cyan[]        = "#005577";
-static const char col_turquoise[]   = "#009999";
+// static const char col_gray1[]       = "#222222";
+// static const char col_gray2[]       = "#444444";
+// static const char col_gray3[]       = "#bbbbbb";
+// static const char col_gray4[]       = "#eeeeee";
+// static const char col_cyan[]        = "#005577";
+// static const char col_turquoise[]   = "#009999";
+// 
+// static const char col_nordbg[]      = "#2e3440";
+// static const char col_nordfg[]      = "#d8dee9";
+// static const char col_nordselbg[]   = "#4c566a";
+// static const char col_nordselborder[] = "#81a1c1";
 
-static const char col_nordbg[]      = "#2e3440";
-static const char col_nordfg[]      = "#d8dee9";
-static const char col_nordselbg[]   = "#4c566a";
+static const char norm_fg[] = "#81a1c1";
+static const char norm_bg[] = "#2E3440";
+static const char norm_border[] = "#4C566A";
+
+static const char bar_border[] = "#4C566A";
+
+static const char sel_fg[] = "#88c0d0";
+static const char sel_bg[] = "#434c5e";
+static const char sel_border[] = "#8FBCBB";
+
+static const char urg_fg[] = "#8FBCBB";
+static const char urg_bg[] = "#88C0D0";
+static const char urg_border[] = "#88C0D0";
 
 static const char *colors[][3]      = {
-	/*               fg         bg         border   */
-	[SchemeNorm] = { col_nordfg, col_nordbg, col_gray2 },
-	[SchemeSel]  = { col_gray4, col_nordselbg,  col_cyan  },
+
+    /*               fg           bg         border                         */
+    [SchemeNorm]    = { norm_fg,  norm_bg,   norm_border }, // unfocused wins
+    [SchemeSel]     = { sel_fg,   sel_bg,    sel_border },  // the focused win
+    // [SchemeUrg]     = { urg_fg,   urg_bg,    urg_border },
+ /*   [SchemeStatus]  = { status_fg,   norm_bg,   sel_fg }, // Statusbar right {text,background,not used but cannot be empty} */
 };
+
+// static const char *colors[][3]      = {
+// 	/*               fg         bg         border   */
+// 	[SchemeNorm] = { col_nordfg, col_nordbg, col_nordbg },
+// 	[SchemeSel]  = { col_gray4, col_nordselbg,  col_nordselborder  },
+// };
 
 typedef struct {
 	const char *name;
@@ -51,6 +75,7 @@ static const Rule rules[] = {
 	{ NULL,	                "keepassxc",	NULL,	        SPTAG(1),	    1,	         0,             0,	     -1 },
 	{ NULL,	                "keepassxc",    "Auto-Type",	0,	            1,           0,	        0,           -1 },
 	{ NULL,	                "Xephyr",       NULL,	        0,	            0,           0,	        0,           -1 },
+	{ "ttrv",	        "feh",          NULL,	        0,	            1,           0,	        1,           -1 },
 	{ "st-256color",        "st-256color",  NULL,           0,                  0,           1,             0,           -1 },
         { "Firefox",            "Toolkit",      "Picture-in-Picture", 0,            1,           0,             0,           -1 },
         { "godot_boids",        "Godot_Engine",           NULL,           0,                  1,           0,             0,           -1 }
@@ -83,7 +108,8 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, NULL };
+//static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 //static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", norm_bg, "-nf", norm_fg, "-sb", sel_bg, "-sf", sel_fg, NULL };
 
 static const char *termcmd[]  = { "st", NULL };
