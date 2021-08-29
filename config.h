@@ -42,10 +42,11 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class    instance        title       tags mask   iscentered      isfloating      monitor */
-	{ NULL,	    "fzf-run",	    NULL,	0,	    1,              1,		    -1 },
-	{ NULL,	    "scratchpad",   NULL,	SPTAG(0),   0,              1,		    -1 },
-	{ NULL,	    "keepassxc",    NULL,	SPTAG(1),   0,              1,		    -1 },
+	/* class    instance        title                       tags mask   iscentered      isfloating      monitor */
+	{ NULL,	    "fzf-run",	    NULL,	                0,	    1,              1,		    -1 },
+	{ NULL,	    "scratchpad",   NULL,	                SPTAG(0),   0,              1,		    -1 },
+	{ NULL,	    NULL,           "Auto-Type - KeePassXC",	0,          0,              1,		    -1 },
+	{ NULL,	    "keepassxc",    NULL,	                SPTAG(1),   0,              1,		    -1 },
 };
 
 /* layout(s) */
@@ -81,8 +82,7 @@ static const char *termcmd[]  = { "st", NULL };
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
-	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
-	{ MODKEY,                       XK_Tab,    view,           {0} },
+	{ MODKEY|ShiftMask,             XK_i,      incnmaster,     {.i = -1 } },
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
 };
 
@@ -102,6 +102,13 @@ static Button buttons[] = {
 	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
 	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
 };
+
+void
+viewlast()
+{
+        const Arg *a = {0}; 
+	view(&a);
+}
 
 void
 setlayoutex(const Arg *arg)
@@ -159,6 +166,7 @@ static Signal signals[] = {
 	{ "tagmon",         tagmon },
 	{ "zoom",           zoom },
 	{ "view",           view },
+	{ "viewlast",       viewlast },
 	{ "viewall",        viewall },
 	{ "viewex",         viewex },
 	{ "toggleview",     view },
